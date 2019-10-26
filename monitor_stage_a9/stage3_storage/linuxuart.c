@@ -6,7 +6,7 @@ int set_com_config(int fd, int baud_rate, int data_bits, char parity, int stop_b
 	struct termios new_cfg, old_cfg;
 	int speed;
 	/*保存原有串口配置*/
-	if (tcgetattr(fd, &old_cfg) != 0){
+	if (tcgetattr(fd, &old_cfg) != 0){ //tcgetatt用来获取终端参数，成功返回零；失败返回非零
 		perror("tcgetattr");
 		return -1;
 	}
@@ -48,8 +48,8 @@ int set_com_config(int fd, int baud_rate, int data_bits, char parity, int stop_b
 					}
 	}
 
-	cfsetispeed(&new_cfg, speed);
-	cfsetospeed(&new_cfg, speed);
+	cfsetispeed(&new_cfg, speed);//用来设置波特率
+	cfsetospeed(&new_cfg, speed);//cfgetisspeed cfgettospeed 用来获取波特率
 
 	/*设置数据位*/
 	switch (data_bits)
@@ -71,14 +71,14 @@ int set_com_config(int fd, int baud_rate, int data_bits, char parity, int stop_b
 		default:
 		case 'n':
 		case 'N':{
-					 new_cfg.c_cflag &= ~PARENB;
+					 new_cfg.c_cflag &= ~PARENB; //不使用奇偶校验
 					 new_cfg.c_iflag &= ~INPCK;
 					 break;
 				 }
 		case 'o':
 		case 'O':{
-					 new_cfg.c_cflag |= (PARODD |PARENB);
-					 new_cfg.c_iflag |= INPCK;
+					 new_cfg.c_cflag |= (PARODD |PARENB); //使用奇偶校验，寄校验
+					 new_cfg.c_iflag |= INPCK; //允许输入奇偶校验
 					 break;
 				 }
 		case 'e':
@@ -91,7 +91,7 @@ int set_com_config(int fd, int baud_rate, int data_bits, char parity, int stop_b
 		case 's':
 		case 'S':{
 					 new_cfg.c_cflag &= ~PARENB;
-					 new_cfg.c_cflag &= ~CSTOPB;
+					 new_cfg.c_cflag &= ~CSTOPB;  //不使用停止位
 					 break;
 				 }
 	}
@@ -129,7 +129,7 @@ int open_port(char *com_port)
 	int fd;
 
 	/*打开串口*/
-	fd = open(com_port, O_RDWR|O_NOCTTY|O_NDELAY);
+	fd = open(com_port, O_RDWR|O_NOCTTY|O_NDELAY);//是以读写方式、不把该文件作为终端设备、无延时模式打开串口
 	if (fd < 0){
 		perror("open serial port");
 		return -1;
