@@ -1,0 +1,1 @@
+cmd_/home/fengjunhui/securitymonitor/drivers/fsmpu6050/fsmpu6050.ko := arm-linux-ld -EL -r  -T /home/fengjunhui/kernel/linux-3.14/scripts/module-common.lds --build-id  -o /home/fengjunhui/securitymonitor/drivers/fsmpu6050/fsmpu6050.ko /home/fengjunhui/securitymonitor/drivers/fsmpu6050/fsmpu6050.o /home/fengjunhui/securitymonitor/drivers/fsmpu6050/fsmpu6050.mod.o
