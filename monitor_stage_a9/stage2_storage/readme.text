@@ -1,0 +1,4 @@
+stage2_storage:1.data_gobal.h 添加adc mpu6050的宏
+                              上传共享内存的通信结构体添加attrribute
+			   2.pthread_refresh.c:完善模拟上传数据，实现数据的模拟上传
+			   3.pthread_transfer.c:完善以实现模拟上传数据
