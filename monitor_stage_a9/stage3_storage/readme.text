@@ -1,0 +1,12 @@
+stage2_storage:1.data_gobal.h 添加adc mpu6050的宏
+                              上传共享内存的通信结构体添加attrribute
+			   2.pthread_refresh.c:完善模拟上传数据，实现数据的模拟上传
+			   3.pthread_transfer.c:完善以实现模拟上传数据
+
+stage3_storage:1.pthread_led.c 的完善，包括LED的打开，关闭，流水灯，数码管控制
+               2.pthread_buzzer.c 的完善，包括beep的打开和关闭
+
+调试的时候发现，pthread_mutex_t mutex_fan,
+	放在data_global.h中声明，初始化（pthread_mutex_init）后，
+	申请不了锁（pthread_mutex_trylock), 发现锁已经被占用，
+	声明改为pthread_mutex_t mutex_mf就没有这个现象
